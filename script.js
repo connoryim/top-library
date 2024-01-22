@@ -1,18 +1,19 @@
 const addBook = document.getElementById("addBook");
 const container = document.getElementById("container")
 
-addBook.addEventListener("click",() =>{
+addBook.addEventListener("click",function(e){
     if(!(document.getElementById("bookForm"))){
         var bookForm = document.createElement("form");
         bookForm.onsubmit = function(e){
             e.preventDefault();
-            console.log("Hello")
             const data = new FormData(this);
             bookData(data);
             this.remove();
         };
 
         bookForm.setAttribute("id","bookForm")
+
+        
 
         var formHead = document.createElement("span");
         formHead.setAttribute("id","formHead")
@@ -63,7 +64,19 @@ addBook.addEventListener("click",() =>{
         bookForm.appendChild(submit);
 
         container.appendChild(bookForm);
+        e.stopPropagation();
     };
+    
+});
+
+window.addEventListener("click",function(e){
+    var formExist = document.getElementById("bookForm");
+    if(!!formExist){
+        if(!(document.getElementById("bookForm").contains(e.target))){
+            bookForm.remove()
+            console.log(this);
+        }
+    }
 });
 
 function bookData(data){
