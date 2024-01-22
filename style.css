@@ -51,7 +51,29 @@ table {
     --st-grey-background: rgb(235, 235, 235);
 }
 
+.block{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    border-radius: 8px;
+    font-size: 2rem;
+    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.4);
+    align-items: center;
+}
 
+.block span{
+    margin: 24px;
+}
+
+.block button{
+    margin: 16px;
+    font-size: 2rem;
+    border-radius: 4px;
+    border-style: none;
+    padding: 16px 24px;
+    width: 350px;
+}
 
 body {
     background-color: var(--st-grey-background);
@@ -96,16 +118,18 @@ form{
     padding: 24px;
     display: flex;
     flex-direction: column;
-    margin-top: 40vh;
     position: fixed;
+    top: 10%;
+    left: 50%;
+    margin-left: -174px;
     width: 300px;
     height: 400px;
     background-color: white;
-    justify-content: space-between;
+    justify-content: space-between;     
     align-items: center;
     border-radius: 16px;
     font-size: 2rem;
-    box-shadow: 0 0 0 100vh rgba(0,0,0,.4);
+    box-shadow: 0 0 0 120vh rgba(0,0,0,.4);
 }
 
 form input{
@@ -129,4 +153,20 @@ input#formRead{
     height: 20px;
     width: 20px;
     margin-left: 16px;
+}
+
+.read{
+    background-color: rgb(85, 170, 85);
+}
+
+.notRead{
+    background-color: rgb(238, 82, 82);
+}
+
+#library{
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(3,400px);
+    gap: 80px
+    ;
 }

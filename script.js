@@ -1,5 +1,7 @@
 const addBook = document.getElementById("addBook");
-const container = document.getElementById("container")
+const container = document.getElementById("container");
+const library = document.getElementById("library");
+
 
 addBook.addEventListener("click",function(e){
     if(!(document.getElementById("bookForm"))){
@@ -69,6 +71,8 @@ addBook.addEventListener("click",function(e){
     
 });
 
+
+//Removes bookForm when the screen is clicked outside of bookForm
 window.addEventListener("click",function(e){
     var formExist = document.getElementById("bookForm");
     if(!!formExist){
@@ -106,7 +110,7 @@ function bookBlock(book){
 
     var pages = document.createElement("span");
     pages.setAttribute("class","pages");
-    pages.textContent = book["pages"];    
+    pages.textContent = book["pages"] + " pages";    
 
     var read = document.createElement("button");
     if(book["read"]){
@@ -130,7 +134,7 @@ function bookBlock(book){
     });
 
     var remove = document.createElement("button");
-    remove.textContent = "remove";
+    remove.textContent = "Remove";
     remove.addEventListener("click",function(){
         remove.parentNode.remove();
     });
@@ -141,7 +145,7 @@ function bookBlock(book){
     block.appendChild(read);
     block.appendChild(remove);
 
-    document.body.appendChild(block);
+    library.appendChild(block);
 
 };
 
