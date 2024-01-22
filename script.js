@@ -26,18 +26,21 @@ addBook.addEventListener("click",function(e){
         title.name = "title";
         title.placeholder = "Title";
         title.setAttribute("required","required");
+        title.setAttribute("maxlength",72);
 
         var author = document.createElement("input");
         author.type = "text";
         author.name = "author";
         author.placeholder = "Author";
         author.setAttribute("required","required")
+        author.setAttribute("maxlength",72);
 
         var pages = document.createElement("input");
         pages.type = "number";
         pages.name = "pages";
         pages.placeholder = "Pages";
-        pages.setAttribute("required","required")
+        pages.setAttribute("required","required");
+        pages.setAttribute("max",10000);
         
         var readBox = document.createElement("div");
         readBox.setAttribute("id","readBox")
