@@ -1,9 +1,5 @@
-
-
-//A function that when called displays a form for the user to input
-// information on a book
-
 const addBook = document.getElementById("addBook");
+const container = document.getElementById("container")
 
 addBook.addEventListener("click",() =>{
     if(!(document.getElementById("bookForm"))){
@@ -18,45 +14,57 @@ addBook.addEventListener("click",() =>{
 
         bookForm.setAttribute("id","bookForm")
 
+        var formHead = document.createElement("span");
+        formHead.setAttribute("id","formHead")
+        formHead.textContent = "New Book"
+
         var title = document.createElement("input");
         title.type = "text";
         title.name = "title";
-        title.placeholder = "title";
+        title.placeholder = "Title";
         title.setAttribute("required","required");
 
         var author = document.createElement("input");
         author.type = "text";
         author.name = "author";
-        author.placeholder = "author";
+        author.placeholder = "Author";
         author.setAttribute("required","required")
 
         var pages = document.createElement("input");
         pages.type = "number";
         pages.name = "pages";
-        pages.placeholder = "pages";
+        pages.placeholder = "Pages";
         pages.setAttribute("required","required")
+        
+        var readBox = document.createElement("div");
+        readBox.setAttribute("id","readBox")
 
         var read = document.createElement("input");
         read.type = "checkbox";
-        read.name = "read"
+        read.name = "read";
+        read.value = "Have you read it?";
+        read.id = "formRead"
         
+        var readLabel = document.createElement("label")
+        readLabel.htmlFor = "formRead";
+        readLabel.textContent = "Have you read it?";
 
         var submit = document.createElement("button")
         submit.type = "submit"; 
         submit.textContent = "submit";
 
+        bookForm.appendChild(formHead);
         bookForm.appendChild(title);
         bookForm.appendChild(author);
         bookForm.appendChild(pages);
-        bookForm.appendChild(read);
+        readBox.appendChild(readLabel);
+        readBox.appendChild(read);
+        bookForm.appendChild(readBox);
         bookForm.appendChild(submit);
 
-        document.body.appendChild(bookForm);
+        container.appendChild(bookForm);
     };
 });
-
-//A function that when called creates a new object that stores information
-//on a given book
 
 function bookData(data){
     for (const [name,value] of data) {
@@ -69,12 +77,11 @@ function bookData(data){
 };
 let book = {read:false};
 
-//A funtion that when called takes a book object and creates a new block
-//on screen displaying the book information
 
 function bookBlock(book){
     var block = document.createElement("div")
     block.setAttribute("id",book["title"]);
+    block.setAttribute("class","block")
 
     var title = document.createElement("span");
     title.setAttribute("class","title");
@@ -90,12 +97,24 @@ function bookBlock(book){
 
     var read = document.createElement("button");
     if(book["read"]){
-        read.textContent ="read";
+        read.textContent ="Read";
         read.setAttribute("class","read");
+        console.log("Read")
     } else{
         read.textContent = "Not read";
-        read.setAttribute("class","not read");
+        read.setAttribute("class","notRead");
     };
+    read.addEventListener("click", function(){
+        if(read.classList.contains("read")){
+            read.classList.remove("read");
+            read.classList.add("notRead");
+            read.textContent = "Not read"
+        } else if(read.classList.contains("notRead")){
+            read.classList.remove("notRead");
+            read.classList.add("read");
+            read.textContent = "Read"
+        };
+    });
 
     var remove = document.createElement("button");
     remove.textContent = "remove";
@@ -113,7 +132,3 @@ function bookBlock(book){
 
 };
 
-
-
-//A function that when called deletes selected book object. Connected to
-// a button that is dispalyed on each individual book block on screen

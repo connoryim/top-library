@@ -86,4 +86,47 @@ header > * {
 
 #container {
     margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+form{
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40vh;
+    position: fixed;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    font-size: 2rem;
+    box-shadow: 0 0 0 100vh rgba(0,0,0,.4);
+}
+
+form input{
+    height: 10%;
+    font-size: 1rem;
+    border-radius: 8px;
+    border-style: none;
+    background-color: var(--st-grey-background);
+    text-indent: 10px;
+    
+}
+
+#readBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+input#formRead{
+    height: 20px;
+    width: 20px;
+    margin-left: 16px;
 }
