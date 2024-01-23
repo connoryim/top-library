@@ -1,7 +1,7 @@
 const addBook = document.getElementById("addBook");
 const container = document.getElementById("container");
 const library = document.getElementById("library");
-
+const myLibrary = [];
 
 addBook.addEventListener("click",function(e){
     if(!(document.getElementById("bookForm"))){
@@ -9,7 +9,8 @@ addBook.addEventListener("click",function(e){
         bookForm.onsubmit = function(e){
             e.preventDefault();
             const data = new FormData(this);
-            bookData(data);
+            myLibrary.unshift(new bookData(data));
+            addBookToLibrary()
             this.remove();
         };
 
@@ -48,7 +49,6 @@ addBook.addEventListener("click",function(e){
         var read = document.createElement("input");
         read.type = "checkbox";
         read.name = "read";
-        read.value = "Have you read it?";
         read.id = "formRead"
         
         var readLabel = document.createElement("label")
@@ -75,28 +75,32 @@ addBook.addEventListener("click",function(e){
 });
 
 
+
 //Removes bookForm when the screen is clicked outside of bookForm
 window.addEventListener("click",function(e){
     var formExist = document.getElementById("bookForm");
     if(!!formExist){
         if(!(document.getElementById("bookForm").contains(e.target))){
             bookForm.remove()
-            console.log(this);
         }
     }
 });
 
 function bookData(data){
-    for (const [name,value] of data) {
-        book[name] = value;
-    };
-    if(book["read"]=="on"){
-        book["read"] = true;
-    }
-    bookBlock(book);
+    this.title = data.get("title");
+    this.author = data.get("author");
+    this.pages = data.get("pages") + " pages";
+    this.read = data.get("read");
 };
-let book = {read:false};
 
+function addBookToLibrary(){
+    for(var i = 0; i < myLibrary.length; i++){
+        if(!(document.getElementById(myLibrary[i].title))){
+            bookBlock(myLibrary[i]);
+        };
+        console.log(myLibrary[i]);
+    };
+};
 
 function bookBlock(book){
     var block = document.createElement("div")
@@ -139,6 +143,7 @@ function bookBlock(book){
     var remove = document.createElement("button");
     remove.textContent = "Remove";
     remove.addEventListener("click",function(){
+        bookDelete(remove.parentNode.id);
         remove.parentNode.remove();
     });
 
@@ -152,3 +157,11 @@ function bookBlock(book){
 
 };
 
+function bookDelete(book){
+    for(var i = 0; i < myLibrary.length; i++){
+        if(myLibrary[i].title == book){
+            myLibrary.splice(i,1);
+            i-=1;
+        };
+    };
+};
